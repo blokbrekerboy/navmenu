@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #333;
+            padding: 10px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 15px;
+            display: block;
+        }
+
+        nav ul li a:hover {
+            background-color: #555;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                background-color: #444;
+                width: 100%;
+                padding: 0;
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+                background: none;
+                border: none;
+                font-size: 30px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <button class="menu-toggle">☰</button>
+        <ul id="menu"></ul>
+    </nav>
+
+    <script>
+        const menuData = [
+            {"title": "Home", "url": "/"},
+            {"title": "Producten", "url": "/producten/"},
+            {"title": "Over ons", "url": "/overons/"},
+            {"title": "Contact", "url": "/contact/"}
+        ];
+
+        function createMenu(menuItems) {
+            const menu = document.getElementById("menu");
+
+            menuItems.forEach(item => {
+                const li = document.createElement("li");
+                const a = document.createElement("a");
+                a.href = item.url;
+                a.textContent = item.title;
+                li.appendChild(a);
+                menu.appendChild(li);
+            });
+
+            // Toggle menu on mobile
+            const menuToggle = document.querySelector(".menu-toggle");
+            menuToggle.addEventListener("click", () => {
+                menu.classList.toggle("show");
+            });
+        }
+
+        createMenu(menuData);
+    </script>
+
+</body>
+</html>
